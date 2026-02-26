@@ -13,12 +13,12 @@ const HeroSection = () => {
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading text-primary-foreground leading-none mb-4">
               UNDIES THAT
               <br />
-              <span className="text-secondary">PACK A</span>
+              <span className="text-secondary">SLAP</span>
               <br />
-              PUNCH! 💥
+              DIFFERENT! 🍑💥
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 font-body mb-8 max-w-md mx-auto md:mx-0">
-              Sri Lanka's most comfortable & fun men's underwear. Feel like a superhero, every single day!
+              Sri Lanka's funniest & comfiest men's underwear. Your butt deserves better. Period.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link to="/products" className="comic-btn-secondary text-xl">
