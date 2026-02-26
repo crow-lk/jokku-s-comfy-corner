@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Bangers', 'cursive'],
-        body: ['Nunito', 'sans-serif'],
+        heading: ['Lilita One', 'cursive'],
+        body: ['Fredoka', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

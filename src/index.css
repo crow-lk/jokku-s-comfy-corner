@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,44 +6,43 @@
 
 @layer base {
   :root {
-    --background: 35 30% 94%;
-    --foreground: 25 40% 12%;
+    --background: 45 100% 97%;
+    --foreground: 250 30% 15%;
 
-    --card: 40 25% 96%;
-    --card-foreground: 25 40% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 30% 15%;
 
-    --popover: 40 25% 96%;
-    --popover-foreground: 25 40% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 30% 15%;
 
-    --primary: 25 55% 35%;
-    --primary-foreground: 40 30% 95%;
+    --primary: 262 80% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 38 45% 60%;
-    --secondary-foreground: 25 40% 12%;
+    --secondary: 45 100% 60%;
+    --secondary-foreground: 250 30% 15%;
 
-    --muted: 35 20% 88%;
-    --muted-foreground: 25 15% 45%;
+    --muted: 250 15% 92%;
+    --muted-foreground: 250 10% 45%;
 
-    --accent: 12 60% 45%;
-    --accent-foreground: 40 30% 95%;
+    --accent: 340 85% 58%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 55% 45%;
-    --destructive-foreground: 40 30% 95%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 72%;
-    --input: 30 20% 72%;
-    --ring: 25 55% 35%;
+    --border: 250 20% 82%;
+    --input: 250 20% 82%;
+    --ring: 262 80% 55%;
 
-    --radius: 1rem;
+    --radius: 1.2rem;
 
-    --comic-shadow: 4px 4px 0px hsl(25 40% 12%);
-    --comic-shadow-lg: 6px 6px 0px hsl(25 40% 12%);
-    --comic-shadow-hover: 2px 2px 0px hsl(25 40% 12%);
-    --comic-border: 3px solid hsl(25 40% 12%);
+    --comic-shadow: 4px 4px 0px hsl(250 30% 15%);
+    --comic-shadow-lg: 6px 6px 0px hsl(250 30% 15%);
+    --comic-shadow-hover: 2px 2px 0px hsl(250 30% 15%);
+    --comic-border: 3px solid hsl(250 30% 15%);
 
-    --font-heading: 'Bangers', cursive;
-    --font-body: 'Nunito', sans-serif;
-
+    --font-heading: 'Lilita One', cursive;
+    --font-body: 'Fredoka', sans-serif;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
