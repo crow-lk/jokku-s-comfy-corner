@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    --background: 50 100% 97%;
-    --foreground: 220 25% 10%;
+    --background: 35 30% 94%;
+    --foreground: 25 40% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 40 25% 96%;
+    --card-foreground: 25 40% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover: 40 25% 96%;
+    --popover-foreground: 25 40% 12%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 25 55% 35%;
+    --primary-foreground: 40 30% 95%;
 
-    --secondary: 45 100% 55%;
-    --secondary-foreground: 220 25% 10%;
+    --secondary: 38 45% 60%;
+    --secondary-foreground: 25 40% 12%;
 
-    --muted: 210 30% 93%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 35 20% 88%;
+    --muted-foreground: 25 15% 45%;
 
-    --accent: 10 90% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 12 60% 45%;
+    --accent-foreground: 40 30% 95%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 55% 45%;
+    --destructive-foreground: 40 30% 95%;
 
-    --border: 220 20% 85%;
-    --input: 220 20% 85%;
-    --ring: 210 100% 50%;
+    --border: 30 20% 72%;
+    --input: 30 20% 72%;
+    --ring: 25 55% 35%;
 
     --radius: 1rem;
 
-    --comic-shadow: 4px 4px 0px hsl(220 25% 10%);
-    --comic-shadow-lg: 6px 6px 0px hsl(220 25% 10%);
-    --comic-shadow-hover: 2px 2px 0px hsl(220 25% 10%);
-    --comic-border: 3px solid hsl(220 25% 10%);
+    --comic-shadow: 4px 4px 0px hsl(25 40% 12%);
+    --comic-shadow-lg: 6px 6px 0px hsl(25 40% 12%);
+    --comic-shadow-hover: 2px 2px 0px hsl(25 40% 12%);
+    --comic-border: 3px solid hsl(25 40% 12%);
 
     --font-heading: 'Bangers', cursive;
     --font-body: 'Nunito', sans-serif;
