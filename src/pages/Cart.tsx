@@ -143,12 +143,9 @@ const Cart = () => {
                 </span>
               </div>
             </div>
-            <button
-              onClick={() => toast.success("Checkout coming soon! 🚀")}
-              className="comic-btn-accent text-xl w-full justify-center mb-3"
-            >
+            <Link to="/checkout" className="comic-btn-accent text-xl w-full justify-center mb-3">
               CHECKOUT 🎉
-            </button>
+            </Link>
             <button
               onClick={handleClear}
               className="comic-btn bg-muted text-muted-foreground text-sm w-full justify-center"

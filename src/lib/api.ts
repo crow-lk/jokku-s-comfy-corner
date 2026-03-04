@@ -88,6 +88,57 @@ export interface ApiCartMutationResponse {
   cart: ApiCart | null;
 }
 
+export interface ApiPaymentMethod {
+  id: number;
+  name: string;
+  code: string;
+  type: "online" | "offline";
+  gateway: string | null;
+  description: string | null;
+  icon_path: string | null;
+  instructions: string | null;
+  sort_order: number;
+  settings: Record<string, unknown> | null;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ApiPaymentInitResponse {
+  message: string;
+  payment: {
+    id: number;
+    cart_id: number | null;
+    order_id: number | null;
+    amount_paid: number;
+    payment_method_id: number;
+    gateway: string | null;
+    payment_status: string;
+    created_at: string;
+    updated_at: string;
+  };
+  checkout: Record<string, unknown>;
+}
+
+export interface ApiOrderResponse {
+  message: string;
+  order: {
+    id: number;
+    order_number: string;
+    status: string;
+    payment_status: string;
+    fulfillment_status: string;
+    currency: string;
+    subtotal: number;
+    tax_total: number;
+    discount_total: number;
+    shipping_total: number;
+    grand_total: number;
+    created_at: string;
+    updated_at: string;
+  };
+}
+
 export interface UiProductVariant {
   id: number;
   sizeName: string | null;
@@ -259,6 +310,14 @@ export const fetchCategories = async () => {
   return data as ApiCategory[];
 };
 
+export const fetchPaymentMethods = async () => {
+  const data = await request<unknown>("/payment-methods");
+  if (!Array.isArray(data)) {
+    throw new ApiError(500, "Invalid payment methods response.", data);
+  }
+  return data as ApiPaymentMethod[];
+};
+
 export const fetchCart = async () => {
   const token = getAuthToken();
   if (!token) {
@@ -322,6 +381,75 @@ export const clearCart = () => {
     payload.session_id = getSessionId();
   }
   return request<ApiCartMutationResponse>("/cart/clear", {
+    method: "POST",
+    body: payload,
+  });
+};
+
+interface CheckoutCustomer {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  address_line1: string;
+  address_line2?: string;
+  city: string;
+  country: string;
+  postal_code?: string;
+}
+
+interface CheckoutPayload {
+  payment_method_id?: number | null;
+  payment_id?: number | null;
+  session_id?: string | null;
+  currency?: string;
+  shipping_total?: number;
+  notes?: string;
+  shipping: CheckoutCustomer;
+  billing?: CheckoutCustomer;
+  payment_receipt?: File | null;
+}
+
+const appendFormData = (form: FormData, prefix: string, value: unknown) => {
+  if (value === undefined || value === null) return;
+  if (typeof value === "object" && !(value instanceof File)) {
+    Object.entries(value as Record<string, unknown>).forEach(([key, nested]) => {
+      appendFormData(form, `${prefix}[${key}]`, nested);
+    });
+    return;
+  }
+  form.append(prefix, value instanceof File ? value : String(value));
+};
+
+export const initPayment = async (payload: CheckoutPayload) => {
+  const response = await request<ApiPaymentInitResponse>("/checkout/payments", {
+    method: "POST",
+    body: payload,
+  });
+  return response;
+};
+
+export const createOrder = async (payload: CheckoutPayload) => {
+  if (payload.payment_receipt) {
+    const form = new FormData();
+    appendFormData(form, "payment_method_id", payload.payment_method_id ?? null);
+    appendFormData(form, "payment_id", payload.payment_id ?? null);
+    appendFormData(form, "session_id", payload.session_id ?? null);
+    appendFormData(form, "currency", payload.currency ?? null);
+    appendFormData(form, "shipping_total", payload.shipping_total ?? null);
+    appendFormData(form, "notes", payload.notes ?? null);
+    appendFormData(form, "shipping", payload.shipping);
+    if (payload.billing) {
+      appendFormData(form, "billing", payload.billing);
+    }
+    appendFormData(form, "payment_receipt", payload.payment_receipt);
+    return request<ApiOrderResponse>("/checkout/orders", {
+      method: "POST",
+      body: form,
+    });
+  }
+
+  return request<ApiOrderResponse>("/checkout/orders", {
     method: "POST",
     body: payload,
   });
