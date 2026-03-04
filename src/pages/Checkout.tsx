@@ -37,7 +37,7 @@ const defaultShipping: ShippingForm = {
 };
 
 const Checkout = () => {
-  const { items, subtotal, totalItems, isLoading } = useCart();
+  const { items, subtotal, totalItems, isLoading, clearCart } = useCart();
   const navigate = useNavigate();
   const paymentMethodsQuery = useQuery({
     queryKey: ["payment-methods"],
@@ -145,13 +145,14 @@ const Checkout = () => {
         }
 
         if (payment.payment?.id) {
-          await createOrder({
+          const order = await createOrder({
             ...payload,
             payment_id: payment.payment.id,
             payment_method_id: null,
           });
-          toast.success("Order placed successfully!");
-          navigate("/cart");
+          await clearCart();
+          toast.success("Order placed successfully.");
+          navigate("/order-success", { state: { orderNumber: order.order.order_number } });
           return;
         }
 
@@ -159,9 +160,10 @@ const Checkout = () => {
         return;
       }
 
-      await createOrder(payload);
-      toast.success("Order placed successfully!");
-      navigate("/cart");
+      const order = await createOrder(payload);
+      await clearCart();
+      toast.success("Order placed successfully.");
+      navigate("/order-success", { state: { orderNumber: order.order.order_number } });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Checkout failed.";
       toast.error(message);
