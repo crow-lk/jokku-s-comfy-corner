@@ -118,15 +118,14 @@ const SESSION_KEY = "guestSessionId";
 
 const trimTrailingSlash = (value: string) => value.replace(/\/+$/, "");
 
+const DEFAULT_APP_URL = "https://hub.jokku.lk";
+
 const getBaseUrl = () => {
   const envUrl = import.meta.env.VITE_APP_URL as string | undefined;
   if (envUrl && envUrl.trim().length > 0) {
     return trimTrailingSlash(envUrl.trim());
   }
-  if (typeof window !== "undefined") {
-    return window.location.origin;
-  }
-  return "";
+  return DEFAULT_APP_URL;
 };
 
 const API_BASE = `${getBaseUrl()}/api`;
