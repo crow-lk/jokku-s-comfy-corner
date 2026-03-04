@@ -28,7 +28,7 @@ export interface ApiProductVariant {
   size_name: string | null;
   color: { id: number; name: string; hex: string | null } | null;
   colors: Array<{ id: number; name: string; hex: string | null }>;
-  selling_price: number | null;
+  selling_price: number | string | null;
   quantity: number;
   status: "active" | "inactive";
 }
@@ -330,7 +330,14 @@ export const clearCart = () => {
 export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, string>) => {
   const activeVariants = product.variants.filter((variant) => variant.status === "active");
   const prices = activeVariants
-    .map((variant) => variant.selling_price)
+    .map((variant) => {
+      if (typeof variant.selling_price === "number") return variant.selling_price;
+      if (typeof variant.selling_price === "string") {
+        const parsed = Number.parseFloat(variant.selling_price);
+        return Number.isFinite(parsed) ? parsed : null;
+      }
+      return null;
+    })
     .filter((price): price is number => typeof price === "number");
   const price = prices.length > 0 ? Math.min(...prices) : null;
   const sizes = Array.from(
@@ -355,7 +362,11 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
     variants: activeVariants.map((variant) => ({
       id: variant.id,
       sizeName: variant.size_name,
-      sellingPrice: variant.selling_price,
+      sellingPrice: typeof variant.selling_price === "number"
+        ? variant.selling_price
+        : typeof variant.selling_price === "string"
+          ? Number.parseFloat(variant.selling_price)
+          : null,
       quantity: variant.quantity,
       status: variant.status,
     })),
