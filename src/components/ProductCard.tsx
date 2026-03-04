@@ -10,7 +10,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const discount = product.originalPrice && product.price
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
-  const hasPrice = typeof product.price === "number";
+  const hasPrice = !product.inquiryOnly && !product.showPriceInquiryMode && typeof product.price === "number";
   const hasRating = typeof product.rating === "number" && typeof product.reviews === "number";
 
   return (

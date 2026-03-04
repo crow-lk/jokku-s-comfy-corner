@@ -66,7 +66,7 @@ const ProductDetail = () => {
     ? product.variants[0]
     : product.variants.find((variant) => variant.sizeName === selectedSize);
   const displayPrice = selectedVariant?.sellingPrice ?? product.price;
-  const hasPrice = typeof displayPrice === "number";
+  const canPurchase = !product.inquiryOnly && !product.showPriceInquiryMode && typeof displayPrice === "number";
   const hasRating = typeof product.rating === "number" && typeof product.reviews === "number";
 
   const handleAddToCart = async () => {
@@ -74,8 +74,8 @@ const ProductDetail = () => {
       toast.error("Please select a size first! 📏");
       return;
     }
-    if (!hasPrice) {
-      toast.error("This item is price on request.");
+    if (product.inquiryOnly || product.showPriceInquiryMode || !canPurchase) {
+      toast.error("This item is available on inquiry only.");
       return;
     }
     try {
@@ -126,12 +126,12 @@ const ProductDetail = () => {
           )}
 
           <div className="flex items-baseline gap-3 mb-6">
-            {hasPrice ? (
+            {canPurchase ? (
               <span className="text-4xl font-heading text-primary">Rs.{displayPrice}</span>
             ) : (
               <span className="text-2xl font-heading text-muted-foreground">Price on request</span>
             )}
-            {product.originalPrice && hasPrice && (
+            {product.originalPrice && canPurchase && (
               <span className="text-xl text-muted-foreground line-through">Rs.{product.originalPrice}</span>
             )}
           </div>
@@ -179,11 +179,11 @@ const ProductDetail = () => {
 
           <button
             onClick={handleAddToCart}
-            disabled={!selectedVariant || !hasPrice}
-            className={`comic-btn-accent text-2xl w-full justify-center gap-3 ${(!selectedVariant || !hasPrice) ? "opacity-60 cursor-not-allowed" : ""}`}
+            disabled={!selectedVariant || !canPurchase}
+            className={`comic-btn-accent text-2xl w-full justify-center gap-3 ${(!selectedVariant || !canPurchase) ? "opacity-60 cursor-not-allowed" : ""}`}
           >
             <ShoppingCart className="w-6 h-6" />
-            {hasPrice ? `ADD TO CART — Rs.${(displayPrice ?? 0) * quantity}` : "PRICE ON REQUEST"}
+            {canPurchase ? `ADD TO CART — Rs.${(displayPrice ?? 0) * quantity}` : "PRICE ON REQUEST"}
           </button>
         </div>
       </div>
