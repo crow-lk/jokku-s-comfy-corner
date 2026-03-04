@@ -95,9 +95,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     quantity: toNumber(item.quantity),
   }));
 
-  const subtotal = cart?.subtotal === undefined || cart?.subtotal === null
-    ? items.reduce((sum, item) => sum + item.line_total, 0)
-    : toNumber(cart.subtotal);
+  const subtotal = items.reduce((sum, item) => sum + item.line_total, 0);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
