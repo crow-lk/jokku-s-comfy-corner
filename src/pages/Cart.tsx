@@ -4,7 +4,44 @@ import { Minus, Plus, Trash2, ShoppingCart, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
 const Cart = () => {
-  const { items, updateQuantity, removeFromCart, clearCart, totalPrice, totalItems } = useCart();
+  const { items, updateItem, removeItem, clearCart, subtotal, totalItems, isLoading } = useCart();
+
+  const handleUpdate = async (cartItemId: number, quantity: number) => {
+    try {
+      await updateItem(cartItemId, quantity);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to update cart.";
+      toast.error(message);
+    }
+  };
+
+  const handleRemove = async (cartItemId: number) => {
+    try {
+      await removeItem(cartItemId);
+      toast.success("Item removed from cart");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to remove item.";
+      toast.error(message);
+    }
+  };
+
+  const handleClear = async () => {
+    try {
+      await clearCart();
+      toast.success("Cart cleared!");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to clear cart.";
+      toast.error(message);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-20 text-center">
+        <p className="text-muted-foreground font-body">Loading your cart...</p>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -33,32 +70,41 @@ const Cart = () => {
         {/* Items */}
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
-            <div key={`${item.product.id}-${item.size}`} className="comic-card p-4 flex gap-4">
-              <Link to={`/product/${item.product.id}`} className="shrink-0">
-                <img src={item.product.image} alt={item.product.name} className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl border-2 border-foreground" />
+            <div key={item.id} className="comic-card p-4 flex gap-4">
+              <Link to={`/product/${item.product_id}`} className="shrink-0">
+                <img
+                  src={item.image_url ?? "/placeholder.svg"}
+                  alt={item.product_name}
+                  className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl border-2 border-foreground"
+                />
               </Link>
               <div className="flex-1 min-w-0">
-                <Link to={`/product/${item.product.id}`}>
-                  <h3 className="font-heading text-xl text-foreground truncate">{item.product.name}</h3>
+                <Link to={`/product/${item.product_id}`}>
+                  <h3 className="font-heading text-xl text-foreground truncate">{item.product_name}</h3>
                 </Link>
-                <p className="text-sm text-muted-foreground font-body">Size: {item.size}</p>
-                <p className="font-heading text-xl text-primary mt-1">Rs.{item.product.price}</p>
+                <p className="text-sm text-muted-foreground font-body">
+                  {item.size ? `Size: ${item.size}` : item.variant_display_name}
+                </p>
+                <p className="font-heading text-xl text-primary mt-1">Rs.{item.unit_price}</p>
 
                 <div className="flex items-center gap-4 mt-3">
                   <div className="inline-flex items-center border-2 border-foreground rounded-lg overflow-hidden">
-                    <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)} className="px-3 py-1 hover:bg-muted transition-colors">
+                    <button
+                      onClick={() => handleUpdate(item.id, item.quantity - 1)}
+                      className="px-3 py-1 hover:bg-muted transition-colors"
+                    >
                       <Minus className="w-4 h-4" />
                     </button>
                     <span className="px-4 py-1 font-heading text-lg border-x-2 border-foreground">{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)} className="px-3 py-1 hover:bg-muted transition-colors">
+                    <button
+                      onClick={() => handleUpdate(item.id, item.quantity + 1)}
+                      className="px-3 py-1 hover:bg-muted transition-colors"
+                    >
                       <Plus className="w-4 h-4" />
                     </button>
                   </div>
                   <button
-                    onClick={() => {
-                      removeFromCart(item.product.id, item.size);
-                      toast.success("Item removed from cart");
-                    }}
+                    onClick={() => handleRemove(item.id)}
                     className="text-destructive hover:text-destructive/80 transition-colors"
                   >
                     <Trash2 className="w-5 h-5" />
@@ -66,7 +112,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-heading text-2xl text-foreground">Rs.{item.product.price * item.quantity}</p>
+                <p className="font-heading text-2xl text-foreground">Rs.{item.line_total}</p>
               </div>
             </div>
           ))}
@@ -79,21 +125,21 @@ const Cart = () => {
             <div className="space-y-3 mb-6">
               <div className="flex justify-between font-body">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-bold">Rs.{totalPrice}</span>
+                <span className="font-bold">Rs.{subtotal}</span>
               </div>
               <div className="flex justify-between font-body">
                 <span className="text-muted-foreground">Delivery</span>
-                <span className="font-bold text-primary">{totalPrice >= 3000 ? "FREE" : "Rs.350"}</span>
+                <span className="font-bold text-primary">{subtotal >= 3000 ? "FREE" : "Rs.350"}</span>
               </div>
-              {totalPrice < 3000 && (
+              {subtotal < 3000 && (
                 <p className="text-xs text-muted-foreground font-body">
-                  Add Rs.{3000 - totalPrice} more for free delivery! 🚚
+                  Add Rs.{3000 - subtotal} more for free delivery! 🚚
                 </p>
               )}
               <div className="border-t-2 border-foreground pt-3 flex justify-between">
                 <span className="font-heading text-xl">TOTAL</span>
                 <span className="font-heading text-2xl text-primary">
-                  Rs.{totalPrice + (totalPrice >= 3000 ? 0 : 350)}
+                  Rs.{subtotal + (subtotal >= 3000 ? 0 : 350)}
                 </span>
               </div>
             </div>
@@ -104,10 +150,7 @@ const Cart = () => {
               CHECKOUT 🎉
             </button>
             <button
-              onClick={() => {
-                clearCart();
-                toast.success("Cart cleared!");
-              }}
+              onClick={handleClear}
               className="comic-btn bg-muted text-muted-foreground text-sm w-full justify-center"
             >
               Clear Cart

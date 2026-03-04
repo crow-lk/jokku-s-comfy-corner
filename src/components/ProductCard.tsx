@@ -1,21 +1,23 @@
 import { Link } from "react-router-dom";
-import { Product } from "@/data/products";
+import { UiProduct } from "@/lib/api";
 import { Star } from "lucide-react";
 
 interface ProductCardProps {
-  product: Product;
+  product: UiProduct;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const discount = product.originalPrice
+  const discount = product.originalPrice && product.price
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
+  const hasPrice = typeof product.price === "number";
+  const hasRating = typeof product.rating === "number" && typeof product.reviews === "number";
 
   return (
     <Link to={`/product/${product.id}`} className="comic-card group block overflow-hidden">
       <div className="relative overflow-hidden bg-muted">
         <img
-          src={product.image}
+          src={product.imageUrl ?? "/placeholder.svg"}
           alt={product.name}
           className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
@@ -33,22 +35,30 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div className="p-4">
         <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">
-          {product.category}
+          {product.categoryName}
         </p>
         <h3 className="font-heading text-xl text-foreground mb-2">{product.name}</h3>
-        <div className="flex items-center gap-1 mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={`w-3.5 h-3.5 ${i < Math.floor(product.rating) ? "fill-secondary text-secondary" : "text-muted"}`}
-            />
-          ))}
-          <span className="text-xs text-muted-foreground ml-1">({product.reviews})</span>
-        </div>
+        {hasRating && (
+          <div className="flex items-center gap-1 mb-2">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={`w-3.5 h-3.5 ${i < Math.floor(product.rating ?? 0) ? "fill-secondary text-secondary" : "text-muted"}`}
+              />
+            ))}
+            <span className="text-xs text-muted-foreground ml-1">({product.reviews})</span>
+          </div>
+        )}
         <div className="flex items-center gap-2">
-          <span className="font-heading text-2xl text-primary">Rs.{product.price}</span>
-          {product.originalPrice && (
-            <span className="text-sm text-muted-foreground line-through">Rs.{product.originalPrice}</span>
+          {hasPrice ? (
+            <>
+              <span className="font-heading text-2xl text-primary">Rs.{product.price}</span>
+              {product.originalPrice && (
+                <span className="text-sm text-muted-foreground line-through">Rs.{product.originalPrice}</span>
+              )}
+            </>
+          ) : (
+            <span className="font-heading text-lg text-muted-foreground">Price on request</span>
           )}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useCatalog } from "@/hooks/useCatalog";
 import { Truck, Shield, RotateCcw, Zap } from "lucide-react";
 
 const features = [
@@ -12,8 +12,10 @@ const features = [
 ];
 
 const Index = () => {
+  const { products, isLoading, error } = useCatalog();
   const featuredProducts = products.slice(0, 4);
-  const dealProducts = products.filter((p) => p.originalPrice);
+  const dealProducts = products.filter((p) => p.originalPrice && p.price && p.originalPrice > p.price);
+  const isEmpty = !isLoading && !error && products.length === 0;
 
   return (
     <div>
@@ -42,11 +44,25 @@ const Index = () => {
           </h2>
           <p className="text-muted-foreground font-body mt-2">These undies are literally flying off shelves (and onto butts)</p>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {error && (
+          <p className="text-center text-destructive font-body mb-6">
+            Couldn’t load products right now. Please try again shortly.
+          </p>
+        )}
+        {isEmpty ? (
+          <div className="text-center text-muted-foreground font-body">
+            <p className="text-2xl font-heading text-foreground mb-2">New collection releasing soon!</p>
+            <p>Check back shortly for fresh drops.</p>
+          </div>
+        ) : isLoading ? (
+          <p className="text-center text-muted-foreground font-body">Loading products...</p>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
         <div className="text-center mt-10">
           <Link to="/products" className="comic-btn-primary text-xl">
             VIEW ALL PRODUCTS →
@@ -75,7 +91,7 @@ const Index = () => {
       </section>
 
       {/* Deals */}
-      {dealProducts.length > 0 && (
+      {dealProducts.length > 0 && !isEmpty && (
         <section className="py-16 container mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-heading text-foreground">

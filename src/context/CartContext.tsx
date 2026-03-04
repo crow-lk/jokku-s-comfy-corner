@@ -1,64 +1,102 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
-import { Product } from "@/data/products";
-
-export interface CartItem {
-  product: Product;
-  quantity: number;
-  size: string;
-}
+import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import {
+  addCartItem,
+  clearCart as apiClearCart,
+  fetchCart,
+  removeCartItem as apiRemoveCartItem,
+  updateCartItem as apiUpdateCartItem,
+  type ApiCart,
+  type ApiCartItem,
+} from "@/lib/api";
 
 interface CartContextType {
-  items: CartItem[];
-  addToCart: (product: Product, size: string) => void;
-  removeFromCart: (productId: string, size: string) => void;
-  updateQuantity: (productId: string, size: string, quantity: number) => void;
-  clearCart: () => void;
+  cart: ApiCart | null;
+  items: ApiCartItem[];
+  addItem: (variantId: number, quantity: number) => Promise<void>;
+  updateItem: (cartItemId: number, quantity: number) => Promise<void>;
+  removeItem: (cartItemId: number) => Promise<void>;
+  clearCart: () => Promise<void>;
   totalItems: number;
-  totalPrice: number;
+  subtotal: number;
+  isLoading: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<ApiCart | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const addToCart = useCallback((product: Product, size: string) => {
-    setItems((prev) => {
-      const existing = prev.find((i) => i.product.id === product.id && i.size === size);
-      if (existing) {
-        return prev.map((i) =>
-          i.product.id === product.id && i.size === size
-            ? { ...i, quantity: i.quantity + 1 }
-            : i
-        );
+  useEffect(() => {
+    let active = true;
+
+    const loadCart = async () => {
+      try {
+        const data = await fetchCart();
+        if (active) {
+          setCart(data ?? null);
+        }
+      } catch {
+        if (active) {
+          setCart(null);
+        }
+      } finally {
+        if (active) {
+          setIsLoading(false);
+        }
       }
-      return [...prev, { product, quantity: 1, size }];
-    });
+    };
+
+    loadCart();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const removeFromCart = useCallback((productId: string, size: string) => {
-    setItems((prev) => prev.filter((i) => !(i.product.id === productId && i.size === size)));
+  const addItem = useCallback(async (variantId: number, quantity: number) => {
+    const response = await addCartItem(variantId, quantity);
+    setCart(response.cart ?? null);
   }, []);
 
-  const updateQuantity = useCallback((productId: string, size: string, quantity: number) => {
+  const updateItem = useCallback(async (cartItemId: number, quantity: number) => {
     if (quantity <= 0) {
-      setItems((prev) => prev.filter((i) => !(i.product.id === productId && i.size === size)));
+      const response = await apiRemoveCartItem(cartItemId);
+      setCart(response.cart ?? null);
       return;
     }
-    setItems((prev) =>
-      prev.map((i) =>
-        i.product.id === productId && i.size === size ? { ...i, quantity } : i
-      )
-    );
+    const response = await apiUpdateCartItem(cartItemId, quantity);
+    setCart(response.cart ?? null);
   }, []);
 
-  const clearCart = useCallback(() => setItems([]), []);
+  const removeItem = useCallback(async (cartItemId: number) => {
+    const response = await apiRemoveCartItem(cartItemId);
+    setCart(response.cart ?? null);
+  }, []);
 
-  const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
-  const totalPrice = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+  const clearCart = useCallback(async () => {
+    const response = await apiClearCart();
+    setCart(response.cart ?? null);
+  }, []);
+
+  const items = cart?.items ?? [];
+  const subtotal = cart?.subtotal ?? items.reduce((sum, item) => sum + item.line_total, 0);
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        items,
+        addItem,
+        updateItem,
+        removeItem,
+        clearCart,
+        totalItems,
+        subtotal,
+        isLoading,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
