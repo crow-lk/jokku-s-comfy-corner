@@ -27,6 +27,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [cart, setCart] = useState<ApiCart | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const toNumber = (value: unknown) => {
+    if (typeof value === "number") return value;
+    if (typeof value === "string") {
+      const parsed = Number.parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    return 0;
+  };
+
   useEffect(() => {
     let active = true;
 
@@ -79,8 +88,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart(response.cart ?? null);
   }, []);
 
-  const items = cart?.items ?? [];
-  const subtotal = cart?.subtotal ?? items.reduce((sum, item) => sum + item.line_total, 0);
+  const items = (cart?.items ?? []).map((item) => ({
+    ...item,
+    unit_price: toNumber(item.unit_price),
+    line_total: toNumber(item.line_total),
+    quantity: toNumber(item.quantity),
+  }));
+
+  const subtotal = cart?.subtotal === undefined || cart?.subtotal === null
+    ? items.reduce((sum, item) => sum + item.line_total, 0)
+    : toNumber(cart.subtotal);
+
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (

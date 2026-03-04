@@ -66,9 +66,9 @@ export interface ApiCartItem {
   variant_sku: string | null;
   size: string | null;
   color: string | null;
-  quantity: number;
-  unit_price: number;
-  line_total: number;
+  quantity: number | string;
+  unit_price: number | string;
+  line_total: number | string;
   image_url: string | null;
 }
 
@@ -76,10 +76,10 @@ export interface ApiCart {
   id: number;
   user_id: number | null;
   session_id: string | null;
-  subtotal: number;
-  tax_total: number;
-  discount_total: number;
-  grand_total: number;
+  subtotal: number | string;
+  tax_total: number | string;
+  discount_total: number | string;
+  grand_total: number | string;
   items: ApiCartItem[];
 }
 
