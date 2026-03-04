@@ -43,7 +43,7 @@ const ProductDetail = () => {
   if (productQuery.error) {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-4xl font-heading text-foreground">Couldn’t load this product 😢</h1>
+        <h1 className="text-4xl font-heading text-foreground">Couldn’t load this product</h1>
         <Link to="/products" className="comic-btn-primary mt-6 inline-block">Back to Shop</Link>
       </div>
     );
@@ -52,7 +52,7 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-4xl font-heading text-foreground">Product not found 😢</h1>
+        <h1 className="text-4xl font-heading text-foreground">Product not found</h1>
         <Link to="/products" className="comic-btn-primary mt-6 inline-block">Back to Shop</Link>
       </div>
     );
@@ -71,7 +71,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = async () => {
     if (!selectedVariant) {
-      toast.error("Please select a size first! 📏");
+      toast.error("Please select a size first.");
       return;
     }
     if (product.inquiryOnly || product.showPriceInquiryMode || !canPurchase) {
@@ -81,7 +81,7 @@ const ProductDetail = () => {
     try {
       await addItem(selectedVariant.id, quantity);
       const sizeLabel = (selectedVariant.sizeName ?? selectedSize) || "One Size";
-      toast.success(`${product.name} (${sizeLabel}) added to cart! 🎉`);
+      toast.success(`${product.name} (${sizeLabel}) added to cart.`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unable to add to cart.";
       toast.error(message);
@@ -191,7 +191,7 @@ const ProductDetail = () => {
       {/* Related */}
       {related.length > 0 && (
         <section className="mt-16">
-          <h2 className="text-3xl font-heading text-foreground mb-6">YOU MIGHT ALSO LIKE 👀</h2>
+          <h2 className="text-3xl font-heading text-foreground mb-6">YOU MIGHT ALSO LIKE</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />

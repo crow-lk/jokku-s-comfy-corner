@@ -5,10 +5,10 @@ import { useCatalog } from "@/hooks/useCatalog";
 import { Truck, Shield, RotateCcw, Zap } from "lucide-react";
 
 const features = [
-  { icon: Truck, title: "FREE DELIVERY 🚀", desc: "On orders over Rs.3000" },
-  { icon: Shield, title: "100% COTTON 🌿", desc: "Premium quality fabric" },
-  { icon: RotateCcw, title: "EASY RETURNS 😎", desc: "7-day hassle-free returns" },
-  { icon: Zap, title: "FAST SHIPPING ⚡", desc: "Island-wide next day delivery" },
+  { icon: Truck, title: "FREE DELIVERY", desc: "On orders over Rs.3000" },
+  { icon: Shield, title: "100% COTTON", desc: "Premium quality fabric" },
+  { icon: RotateCcw, title: "EASY RETURNS", desc: "7-day hassle-free returns" },
+  { icon: Zap, title: "FAST SHIPPING", desc: "Island-wide next day delivery" },
 ];
 
 const Index = () => {
@@ -40,9 +40,9 @@ const Index = () => {
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-heading text-foreground">
-            🔥 PEOPLE'S FAVES
+            PEOPLE'S FAVES
           </h2>
-          <p className="text-muted-foreground font-body mt-2">These undies are literally flying off shelves (and onto butts)</p>
+          <p className="text-muted-foreground font-body mt-2">These undies are literally flying off shelves (and onto balls)</p>
         </div>
         {error && (
           <p className="text-center text-destructive font-body mb-6">
@@ -76,16 +76,16 @@ const Index = () => {
           <div className="max-w-2xl mx-auto">
             <div className="speech-bubble mb-8 inline-block">
               <h2 className="text-3xl md:text-4xl font-heading text-foreground">
-                "MY BUTT HAS NEVER BEEN HAPPIER!" 🤩
+                "MY BALLS HAVE NEVER BEEN HAPPIER!"
               </h2>
               <p className="text-muted-foreground font-body mt-2">— Actual Customer, Colombo (we can't make this up)</p>
             </div>
           </div>
           <h3 className="text-4xl md:text-5xl font-heading text-accent-foreground mt-8 mb-4">
-            10,000+ HAPPY BUTTS & COUNTING!
+            10,000+ HAPPY BALLS & COUNTING!
           </h3>
           <Link to="/products" className="comic-btn-secondary text-xl">
-            TREAT YOUR BUTT NOW! 🎉
+            TREAT YOUR BALLS NOW!
           </Link>
         </div>
       </section>
@@ -94,10 +94,10 @@ const Index = () => {
       {dealProducts.length > 0 && !isEmpty && (
         <section className="py-16 container mx-auto px-4">
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-heading text-foreground">
-              💸 STUPID CHEAP DEALS
-            </h2>
-            <p className="text-muted-foreground font-body mt-2">Seriously, we might be losing money on these 😅</p>
+          <h2 className="text-4xl md:text-5xl font-heading text-foreground">
+            STUPID CHEAP DEALS
+          </h2>
+          <p className="text-muted-foreground font-body mt-2">Seriously, we might be losing money on these</p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
             {dealProducts.map((p) => (

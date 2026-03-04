@@ -8,24 +8,24 @@ const HeroSection = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-center md:text-left z-10">
             <div className="inline-block comic-tag bg-secondary text-secondary-foreground mb-4 text-sm">
-              🔥 NEW COLLECTION DROPPED!
+              NEW COLLECTION DROPPED!
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading text-primary-foreground leading-none mb-4">
               UNDIES THAT
               <br />
               <span className="text-secondary">SLAP</span>
               <br />
-              DIFFERENT! 🍑💥
+              DIFFERENT!
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 font-body mb-8 max-w-md mx-auto md:mx-0">
-              Sri Lanka's funniest & comfiest men's underwear. Your butt deserves better. Period.
+              Sri Lanka's funniest & comfiest men's underwear. Your balls deserve better. Period.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link to="/products" className="comic-btn-secondary text-xl">
-                SHOP NOW 🛒
+                SHOP NOW
               </Link>
               <Link to="/products?category=Boxer+Shorts" className="comic-btn bg-primary-foreground text-primary text-xl">
-                BEST SELLERS ⭐
+                BEST SELLERS
               </Link>
             </div>
           </div>

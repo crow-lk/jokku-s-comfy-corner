@@ -47,10 +47,10 @@ const Cart = () => {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
         <ShoppingCart className="w-20 h-20 mx-auto text-muted-foreground mb-6" />
-        <h1 className="text-4xl md:text-5xl font-heading text-foreground mb-4">YOUR CART IS EMPTY! 😱</h1>
+        <h1 className="text-4xl md:text-5xl font-heading text-foreground mb-4">YOUR CART IS EMPTY!</h1>
         <p className="text-muted-foreground font-body text-lg mb-8">Don't worry, we've got plenty of comfy undies waiting for you!</p>
         <Link to="/products" className="comic-btn-primary text-xl">
-          START SHOPPING 🛍️
+          START SHOPPING
         </Link>
       </div>
     );
@@ -63,7 +63,7 @@ const Cart = () => {
       </Link>
 
       <h1 className="text-4xl md:text-5xl font-heading text-foreground mb-8">
-        🛒 YOUR CART ({totalItems} item{totalItems !== 1 ? "s" : ""})
+        YOUR CART ({totalItems} item{totalItems !== 1 ? "s" : ""})
       </h1>
 
       <div className="grid lg:grid-cols-3 gap-8">
@@ -133,7 +133,7 @@ const Cart = () => {
               </div>
               {subtotal < 3000 && (
                 <p className="text-xs text-muted-foreground font-body">
-                  Add Rs.{3000 - subtotal} more for free delivery! 🚚
+                  Add Rs.{3000 - subtotal} more for free delivery.
                 </p>
               )}
               <div className="border-t-2 border-foreground pt-3 flex justify-between">
@@ -144,7 +144,7 @@ const Cart = () => {
               </div>
             </div>
             <Link to="/checkout" className="comic-btn-accent text-xl w-full justify-center mb-3">
-              CHECKOUT 🎉
+              CHECKOUT
             </Link>
             <button
               onClick={handleClear}

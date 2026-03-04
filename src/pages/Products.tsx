@@ -50,7 +50,7 @@ const Products = () => {
   return (
     <div className="container mx-auto px-4 py-10">
       <h1 className="text-4xl md:text-6xl font-heading text-foreground text-center mb-2">
-        🛒 SHOP ALL UNDIES
+        SHOP ALL UNDIES
       </h1>
       <p className="text-center text-muted-foreground font-body mb-8">
         Find your perfect pair — comfort guaranteed or your money back!
@@ -114,7 +114,7 @@ const Products = () => {
 
       {sorted.length === 0 && !isLoading && !isCatalogEmpty && (
         <div className="text-center py-20">
-          <p className="text-4xl font-heading text-muted-foreground">No products found 😅</p>
+          <p className="text-4xl font-heading text-muted-foreground">No products found</p>
           <button onClick={() => handleCategory("All")} className="comic-btn-primary mt-4">
             Show All
           </button>
