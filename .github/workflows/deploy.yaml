@@ -1,0 +1,52 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Node setup
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Install
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build
+      - name: Build project
+        run: npm run build
+
+      # 5. Clean old files on server
+      - name: Clean old files
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            rm -rf domains/jokku.lk/public_html/assets
+            rm -f domains/jokku.lk/public_html/index.html
+
+      # 6. Upload new build
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "dist/*"
+          target: "domains/jokku.lk/public_html/"
