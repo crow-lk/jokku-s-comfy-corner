@@ -456,7 +456,7 @@ export const createOrder = async (payload: CheckoutPayload) => {
   });
 };
 
-export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, string>) => {
+export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, string>): UiProduct => {
   const activeVariants = product.variants.filter((variant) => variant.status === "active");
   const prices = activeVariants
     .map((variant) => {
