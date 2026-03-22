@@ -152,6 +152,7 @@ export interface UiProduct {
   name: string;
   categoryName: string;
   imageUrl: string | null;
+  images: string[];
   description: string | null;
   price: number | null;
   originalPrice?: number | null;
