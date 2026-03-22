@@ -1,7 +1,22 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import heroBanner from "@/assets/hero-banner.png";
+import heroBlack from "@/assets/hero-boxer-black.png";
+import heroRed from "@/assets/hero-boxer-red.png";
+import heroNavy from "@/assets/hero-boxer-navy.png";
+import heroGrey from "@/assets/hero-boxer-grey.png";
+
+const heroImages = [heroBlack, heroRed, heroNavy, heroGrey];
 
 const HeroSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-primary">
       <div className="container mx-auto px-4 py-12 md:py-20">
@@ -29,20 +44,37 @@ const HeroSection = () => {
               </Link>
             </div>
           </div>
-          <div className="relative flex justify-center">
-            <img
-              src={heroBanner}
-              alt="Jokku Hero"
-              className="w-full max-w-lg rounded-3xl border-[3px] border-foreground animate-float"
-              style={{ boxShadow: "var(--comic-shadow-lg)" }}
-            />
+          <div className="relative flex justify-center items-center">
+            <div className="relative w-full max-w-md aspect-square">
+              {heroImages.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  alt={`Jokku boxer briefs ${i + 1}`}
+                  className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-700 ease-in-out"
+                  style={{ opacity: i === activeIndex ? 1 : 0 }}
+                />
+              ))}
+            </div>
             <div className="absolute -top-4 -right-4 bg-accent text-accent-foreground font-heading text-2xl px-4 py-2 rounded-xl border-[3px] border-foreground rotate-12" style={{ boxShadow: "var(--comic-shadow)" }}>
-              FROM Rs.950!
+              FROM Rs.300!
+            </div>
+            {/* Dot indicators */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2">
+              {heroImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={`w-2.5 h-2.5 rounded-full border border-primary-foreground/50 transition-all duration-300 ${
+                    i === activeIndex ? "bg-secondary scale-125" : "bg-primary-foreground/40"
+                  }`}
+                  aria-label={`View color ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
       </div>
-      {/* Halftone overlay */}
       <div className="absolute inset-0 halftone-bg opacity-30 pointer-events-none" />
     </section>
   );
