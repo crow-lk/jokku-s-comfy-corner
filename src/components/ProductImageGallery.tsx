@@ -37,7 +37,7 @@ const ProductImageGallery = ({ images, name, badge }: ProductImageGalleryProps) 
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {/* Main image with swipe */}
       <div
         className="comic-card overflow-hidden p-0 relative bg-muted"
@@ -48,7 +48,7 @@ const ProductImageGallery = ({ images, name, badge }: ProductImageGalleryProps) 
         <img
           src={finalImages[activeIndex]}
           alt={`${name} - image ${activeIndex + 1}`}
-          className="w-full aspect-[3/4] object-cover transition-opacity duration-300"
+          className="w-full aspect-[3/4] object-cover transition-opacity duration-300 md:max-h-[55vh]"
         />
 
         {badge && (
