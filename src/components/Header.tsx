@@ -16,7 +16,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-primary border-b-[3px] border-foreground">
+    <header className="sticky top-0 z-50 bg-foreground border-b-[3px] border-secondary">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img src={logoImg} alt="Jokku.lk" className="h-10 md:h-12 w-auto" />

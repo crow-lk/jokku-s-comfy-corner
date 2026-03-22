@@ -23,7 +23,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-primary">
+    <section className="relative overflow-hidden bg-foreground">
       <div className="container mx-auto px-4 py-12 md:py-20">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-center md:text-left z-10">
