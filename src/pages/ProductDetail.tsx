@@ -5,6 +5,7 @@ import { fetchProduct, mapProductToUi } from "@/lib/api";
 import { useCatalog } from "@/hooks/useCatalog";
 import { useCart } from "@/context/CartContext";
 import ProductCard from "@/components/ProductCard";
+import ProductImageGallery from "@/components/ProductImageGallery";
 import { Star, Minus, Plus, ArrowLeft, ShoppingCart, Check } from "lucide-react";
 import { toast } from "sonner";
 
