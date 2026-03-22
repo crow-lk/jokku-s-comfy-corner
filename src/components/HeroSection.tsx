@@ -4,8 +4,11 @@ import heroBlack from "@/assets/hero-boxer-black.png";
 import heroRed from "@/assets/hero-boxer-red.png";
 import heroNavy from "@/assets/hero-boxer-navy.png";
 import heroGrey from "@/assets/hero-boxer-grey.png";
+import heroBriefWhite from "@/assets/hero-brief-white.png";
+import heroTrunkOlive from "@/assets/hero-trunk-olive.png";
+import heroBoxerBlue from "@/assets/hero-boxer-blue.png";
 
-const heroImages = [heroBlack, heroRed, heroNavy, heroGrey];
+const heroImages = [heroBlack, heroRed, heroBriefWhite, heroNavy, heroTrunkOlive, heroGrey, heroBoxerBlue];
 
 const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
