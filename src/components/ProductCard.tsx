@@ -19,7 +19,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <img
           src={product.imageUrl ?? "/placeholder.svg"}
           alt={product.name}
-          className="w-full aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
         />
         {product.badge && (
