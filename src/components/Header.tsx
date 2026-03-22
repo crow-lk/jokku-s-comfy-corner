@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
+import logoImg from "@/assets/Jokku_logo.png";
 
 const Header = () => {
   const { totalItems } = useCart();
