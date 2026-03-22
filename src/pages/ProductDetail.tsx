@@ -108,7 +108,7 @@ const ProductDetail = () => {
           <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">
             {product.categoryName}
           </p>
-          <h1 className="text-4xl md:text-5xl font-heading text-foreground mb-3">{product.name}</h1>
+          <h1 className="text-3xl md:text-4xl font-heading text-foreground mb-2">{product.name}</h1>
 
           {hasRating && (
             <div className="flex items-center gap-2 mb-4">
