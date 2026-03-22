@@ -97,17 +97,17 @@ const ProductImageGallery = ({ images, name, badge }: ProductImageGalleryProps) 
         )}
       </div>
 
-      {/* Thumbnail strip */}
+      {/* Scrollable thumbnail strip below main image */}
       {finalImages.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory">
           {finalImages.map((img, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               className={cn(
-                "shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-200",
+                "shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 snap-start",
                 i === activeIndex
-                  ? "border-primary ring-2 ring-primary/30"
+                  ? "border-secondary ring-2 ring-secondary/30"
                   : "border-foreground/20 hover:border-foreground/50 opacity-70 hover:opacity-100"
               )}
             >
