@@ -16,7 +16,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-primary border-b-[3px] border-foreground">
+    <header className="sticky top-0 z-50 bg-primary border-b-[3px] border-secondary/30">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img src={logoImg} alt="Jokku.lk" className="h-10 md:h-12 w-auto" />
@@ -65,7 +65,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-primary border-t-2 border-foreground">
+        <div className="md:hidden bg-primary border-t-2 border-secondary/30">
           {navLinks.map((link) => (
             <Link
               key={link.to}
