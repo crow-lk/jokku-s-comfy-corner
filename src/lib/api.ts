@@ -504,4 +504,6 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
 };
 
 export const mapProductsToUi = (products: ApiProduct[], categoryMap: Map<number, string>) =>
-  products.map((product) => mapProductToUi(product, categoryMap));
+  products
+    .filter((product) => product.status === "active")
+    .map((product) => mapProductToUi(product, categoryMap));
