@@ -40,7 +40,7 @@ const ProductImageGallery = ({ images, name, badge }: ProductImageGalleryProps) 
     <div className="space-y-2">
       {/* Main image with swipe */}
       <div
-        className="comic-card overflow-hidden p-0 relative bg-muted aspect-[3/4]"
+        className="comic-card overflow-hidden p-0 relative bg-muted aspect-[3/4] md:max-h-[60vh]"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
