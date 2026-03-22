@@ -19,9 +19,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-primary border-b-[3px] border-foreground">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-3xl md:text-4xl font-heading text-primary-foreground tracking-wider">
-            JOKKU<span className="text-secondary">.lk</span>
-          </span>
+          <img src={logoImg} alt="Jokku.lk" className="h-10 md:h-12 w-auto" />
         </Link>
 
         {/* Desktop nav */}
