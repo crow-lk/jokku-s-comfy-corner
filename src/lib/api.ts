@@ -482,6 +482,7 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
     name: product.name,
     categoryName: product.category_id ? (categoryMap.get(product.category_id) ?? "Uncategorized") : "Uncategorized",
     imageUrl: product.images?.[0] ?? null,
+    images: product.images ?? [],
     description: product.description,
     price,
     originalPrice: null,

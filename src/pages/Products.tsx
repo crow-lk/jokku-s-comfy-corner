@@ -30,8 +30,8 @@ const Products = () => {
       const bPrice = typeof b.price === "number" ? b.price : Number.POSITIVE_INFINITY;
       if (sortBy === "price-low") return aPrice - bPrice;
       if (sortBy === "price-high") return bPrice - aPrice;
-      if (sortBy === "rating") return (b.rating ?? 0) - (a.rating ?? 0);
-      return (b.reviews ?? 0) - (a.reviews ?? 0); // popular
+      if (sortBy === "rating") return ((b as any).rating ?? 0) - ((a as any).rating ?? 0);
+      return ((b as any).reviews ?? 0) - ((a as any).reviews ?? 0); // popular
     });
   }, [filtered, sortBy]);
 
