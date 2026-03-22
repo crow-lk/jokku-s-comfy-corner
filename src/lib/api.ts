@@ -500,7 +500,7 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
       quantity: variant.quantity,
       status: variant.status,
     })),
-  } satisfies UiProduct;
+  };
 };
 
 export const mapProductsToUi = (products: ApiProduct[], categoryMap: Map<number, string>) =>
