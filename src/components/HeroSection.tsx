@@ -65,7 +65,7 @@ const HeroSection = () => {
               FROM Rs.300!
             </div>
             {/* Dot indicators */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
               {heroImages.map((_, i) => (
                 <button
                   key={i}
