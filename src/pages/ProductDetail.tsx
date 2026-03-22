@@ -90,12 +90,12 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Link to="/products" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body mb-6 transition-colors">
+    <div className="container mx-auto px-4 py-4">
+      <Link to="/products" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body mb-4 transition-colors text-sm">
         <ArrowLeft className="w-4 h-4" /> Back to Shop
       </Link>
 
-      <div className="grid md:grid-cols-[2fr_3fr] gap-10">
+      <div className="grid md:grid-cols-[1fr_1fr] gap-8 items-start">
         {/* Image */}
         <ProductImageGallery
           images={product.images}
