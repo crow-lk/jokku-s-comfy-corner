@@ -152,6 +152,7 @@ export interface UiProduct {
   name: string;
   categoryName: string;
   imageUrl: string | null;
+  images: string[];
   description: string | null;
   price: number | null;
   originalPrice?: number | null;
@@ -455,7 +456,7 @@ export const createOrder = async (payload: CheckoutPayload) => {
   });
 };
 
-export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, string>) => {
+export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, string>): UiProduct => {
   const activeVariants = product.variants.filter((variant) => variant.status === "active");
   const prices = activeVariants
     .map((variant) => {
@@ -481,9 +482,10 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
     name: product.name,
     categoryName: product.category_id ? (categoryMap.get(product.category_id) ?? "Uncategorized") : "Uncategorized",
     imageUrl: product.images?.[0] ?? null,
+    images: product.images ?? [],
     description: product.description,
     price,
-    originalPrice: null,
+    originalPrice: null as number | null,
     inquiryOnly: product.inquiry_only || prices.length === 0,
     showPriceInquiryMode: product.show_price_inquiry_mode,
     sizes,
@@ -498,7 +500,7 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
       quantity: variant.quantity,
       status: variant.status,
     })),
-  } satisfies UiProduct;
+  };
 };
 
 export const mapProductsToUi = (products: ApiProduct[], categoryMap: Map<number, string>) =>
