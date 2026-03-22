@@ -14,6 +14,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import NotFound from "./pages/NotFound";
+import FloatingIdeaButton from "@/components/FloatingIdeaButton";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <FloatingIdeaButton />
           </div>
         </BrowserRouter>
       </CartProvider>
