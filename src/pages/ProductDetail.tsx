@@ -95,7 +95,7 @@ const ProductDetail = () => {
         <ArrowLeft className="w-4 h-4" /> Back to Shop
       </Link>
 
-      <div className="grid md:grid-cols-[3fr_2fr] gap-10">
+      <div className="grid md:grid-cols-[2fr_3fr] gap-10">
         {/* Image */}
         <ProductImageGallery
           images={product.images}
