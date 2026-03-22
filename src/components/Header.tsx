@@ -65,7 +65,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-primary border-t-2 border-foreground">
+        <div className="md:hidden bg-primary border-t-2 border-secondary/30">
           {navLinks.map((link) => (
             <Link
               key={link.to}
