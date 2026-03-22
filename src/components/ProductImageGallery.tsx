@@ -48,7 +48,7 @@ const ProductImageGallery = ({ images, name, badge }: ProductImageGalleryProps) 
         <img
           src={finalImages[activeIndex]}
           alt={`${name} - image ${activeIndex + 1}`}
-          className="w-full aspect-square object-contain transition-opacity duration-300"
+          className="w-full aspect-[3/4] object-cover transition-opacity duration-300"
         />
 
         {badge && (
