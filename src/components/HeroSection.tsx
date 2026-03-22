@@ -50,7 +50,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="relative flex justify-center items-center">
-            <div className="relative w-full max-w-md aspect-square">
+            <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-xl aspect-square">
               {heroImages.map((img, i) => (
                 <img
                   key={i}
