@@ -7,8 +7,10 @@ import heroGrey from "@/assets/hero-boxer-grey.png";
 import heroBriefWhite from "@/assets/hero-brief-white.png";
 import heroTrunkOlive from "@/assets/hero-trunk-olive.png";
 import heroBoxerBlue from "@/assets/hero-boxer-blue.png";
+import heroVbriefBlack from "@/assets/hero-vbrief-black.png";
+import heroVbriefNavy from "@/assets/hero-vbrief-navy.png";
 
-const heroImages = [heroBlack, heroRed, heroBriefWhite, heroNavy, heroTrunkOlive, heroGrey, heroBoxerBlue];
+const heroImages = [heroBlack, heroRed, heroVbriefBlack, heroBriefWhite, heroNavy, heroTrunkOlive, heroVbriefNavy, heroGrey, heroBoxerBlue];
 
 const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
