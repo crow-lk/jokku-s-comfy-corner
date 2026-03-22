@@ -97,16 +97,11 @@ const ProductDetail = () => {
 
       <div className="grid md:grid-cols-2 gap-10">
         {/* Image */}
-        <div className="comic-card overflow-hidden p-0">
-          <div className="relative bg-muted">
-            <img src={product.imageUrl ?? "/placeholder.svg"} alt={product.name} className="w-full aspect-square object-cover" />
-            {product.badge && (
-              <span className="absolute top-4 left-4 comic-tag bg-accent text-accent-foreground">
-                {product.badge}
-              </span>
-            )}
-          </div>
-        </div>
+        <ProductImageGallery
+          images={product.images}
+          name={product.name}
+          badge={product.badge}
+        />
 
         {/* Info */}
         <div>

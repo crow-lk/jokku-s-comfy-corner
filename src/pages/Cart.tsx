@@ -88,16 +88,16 @@ const Cart = () => {
                 <p className="font-heading text-xl text-primary mt-1">Rs.{item.unit_price}</p>
 
                 <div className="flex items-center gap-4 mt-3">
-                  <div className="inline-flex items-center border-2 border-foreground rounded-lg overflow-hidden">
+                <div className="inline-flex items-center border-2 border-foreground rounded-lg overflow-hidden">
                     <button
-                      onClick={() => handleUpdate(item.id, item.quantity - 1)}
+                      onClick={() => handleUpdate(item.id, Number(item.quantity) - 1)}
                       className="px-3 py-1 hover:bg-muted transition-colors"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
                     <span className="px-4 py-1 font-heading text-lg border-x-2 border-foreground">{item.quantity}</span>
                     <button
-                      onClick={() => handleUpdate(item.id, item.quantity + 1)}
+                      onClick={() => handleUpdate(item.id, Number(item.quantity) + 1)}
                       className="px-3 py-1 hover:bg-muted transition-colors"
                     >
                       <Plus className="w-4 h-4" />

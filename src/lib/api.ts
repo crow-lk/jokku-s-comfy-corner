@@ -485,7 +485,7 @@ export const mapProductToUi = (product: ApiProduct, categoryMap: Map<number, str
     images: product.images ?? [],
     description: product.description,
     price,
-    originalPrice: null,
+    originalPrice: null as number | null,
     inquiryOnly: product.inquiry_only || prices.length === 0,
     showPriceInquiryMode: product.show_price_inquiry_mode,
     sizes,
