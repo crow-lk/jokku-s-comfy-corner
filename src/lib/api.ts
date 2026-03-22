@@ -507,3 +507,32 @@ export const mapProductsToUi = (products: ApiProduct[], categoryMap: Map<number,
   products
     .filter((product) => product.status === "active")
     .map((product) => mapProductToUi(product, categoryMap));
+
+/* ── Visitor Interest ────────────────────────────────────── */
+
+export type VisitorInterestType = "customer_idea" | "partnership" | "investor";
+
+export interface VisitorInterestPayload {
+  interest_type: VisitorInterestType;
+  name: string;
+  email?: string;
+  phone?: string;
+  company?: string;
+  role?: string;
+  location?: string;
+  investment_range?: string;
+  partnership_area?: string;
+  message: string;
+}
+
+export interface VisitorInterestResponse {
+  message: string;
+  data: Record<string, unknown>;
+}
+
+export const submitVisitorInterest = (payload: VisitorInterestPayload) =>
+  request<VisitorInterestResponse>("/visitor-interests", {
+    method: "POST",
+    body: payload,
+    headers: { Accept: "application/json" },
+  });
