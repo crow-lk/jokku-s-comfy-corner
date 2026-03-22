@@ -121,19 +121,19 @@ const ProductDetail = () => {
             </div>
           )}
 
-          <div className="flex items-baseline gap-3 mb-6">
+          <div className="flex items-baseline gap-3 mb-3">
             {canPurchase ? (
-              <span className="text-4xl font-heading text-primary">Rs.{displayPrice}</span>
+              <span className="text-3xl font-heading text-primary">Rs.{displayPrice}</span>
             ) : (
-              <span className="text-2xl font-heading text-muted-foreground">Price on request</span>
+              <span className="text-xl font-heading text-muted-foreground">Price on request</span>
             )}
             {product.originalPrice && canPurchase && (
-              <span className="text-xl text-muted-foreground line-through">Rs.{product.originalPrice}</span>
+              <span className="text-lg text-muted-foreground line-through">Rs.{product.originalPrice}</span>
             )}
           </div>
 
           {product.description && (
-            <p className="text-foreground/80 font-body text-lg mb-6">{product.description}</p>
+            <p className="text-foreground/80 font-body text-base mb-4 line-clamp-3">{product.description}</p>
           )}
 
           {/* Size */}
