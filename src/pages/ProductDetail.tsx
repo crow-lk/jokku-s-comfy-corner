@@ -121,38 +121,38 @@ const ProductDetail = () => {
             </div>
           )}
 
-          <div className="flex items-baseline gap-3 mb-6">
+          <div className="flex items-baseline gap-3 mb-3">
             {canPurchase ? (
-              <span className="text-4xl font-heading text-primary">Rs.{displayPrice}</span>
+              <span className="text-3xl font-heading text-primary">Rs.{displayPrice}</span>
             ) : (
-              <span className="text-2xl font-heading text-muted-foreground">Price on request</span>
+              <span className="text-xl font-heading text-muted-foreground">Price on request</span>
             )}
             {product.originalPrice && canPurchase && (
-              <span className="text-xl text-muted-foreground line-through">Rs.{product.originalPrice}</span>
+              <span className="text-lg text-muted-foreground line-through">Rs.{product.originalPrice}</span>
             )}
           </div>
 
           {product.description && (
-            <p className="text-foreground/80 font-body text-lg mb-6">{product.description}</p>
+            <p className="text-foreground/80 font-body text-base mb-4 line-clamp-3">{product.description}</p>
           )}
 
           {/* Size */}
           {product.sizes.length > 0 && (
-            <div className="mb-6">
-              <h4 className="font-heading text-xl text-foreground mb-3">SELECT SIZE:</h4>
-              <div className="flex flex-wrap gap-3">
+            <div className="mb-4">
+              <h4 className="font-heading text-lg text-foreground mb-2">SELECT SIZE:</h4>
+              <div className="flex flex-wrap gap-2">
                 {product.sizes.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`comic-tag text-base px-5 py-2 transition-all duration-200 ${
+                    className={`comic-tag text-sm px-4 py-1.5 transition-all duration-200 ${
                       selectedSize === size
                         ? "bg-primary text-primary-foreground"
                         : "bg-card text-foreground hover:bg-muted"
                     }`}
                   >
                     {size}
-                    {selectedSize === size && <Check className="w-4 h-4 inline ml-1" />}
+                    {selectedSize === size && <Check className="w-3.5 h-3.5 inline ml-1" />}
                   </button>
                 ))}
               </div>
@@ -160,8 +160,8 @@ const ProductDetail = () => {
           )}
 
           {/* Quantity */}
-          <div className="mb-8">
-            <h4 className="font-heading text-xl text-foreground mb-3">QUANTITY:</h4>
+          <div className="mb-4">
+            <h4 className="font-heading text-lg text-foreground mb-2">QUANTITY:</h4>
             <div className="inline-flex items-center border-[3px] border-foreground rounded-xl overflow-hidden">
               <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 hover:bg-muted transition-colors">
                 <Minus className="w-5 h-5" />
