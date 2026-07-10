@@ -133,7 +133,7 @@ const ProductDetail = () => {
           </div>
 
           {product.description && (
-            <p className="text-foreground/80 font-body text-base mb-4 line-clamp-3">{product.description}</p>
+            <p className="text-foreground/80 font-body text-base mb-4 line-clamp-5">{product.description}</p>
           )}
 
           {/* Size */}
