@@ -122,8 +122,7 @@ const FloatingIdeaButton = () => {
         onClick={toggle}
         className={cn(
           "fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300",
-          "bg-secondary text-secondary-foreground border-[3px] border-foreground shadow-[var(--comic-shadow)]",
-          "hover:shadow-[var(--comic-shadow-hover)] hover:translate-x-[2px] hover:translate-y-[2px]",
+          "bg-secondary text-secondary-foreground border border-foreground shadow-sm hover:shadow-md hover:-translate-y-0.5",
           open && "rotate-45"
         )}
         aria-label={open ? "Close" : "Share feedback"}

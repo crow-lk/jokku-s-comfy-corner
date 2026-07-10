@@ -162,11 +162,11 @@ const ProductDetail = () => {
           {/* Quantity */}
           <div className="mb-4">
             <h4 className="font-heading text-lg text-foreground mb-2">QUANTITY:</h4>
-            <div className="inline-flex items-center border-[3px] border-foreground rounded-xl overflow-hidden">
+            <div className="inline-flex items-center border border-foreground rounded-xl overflow-hidden">
               <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 hover:bg-muted transition-colors">
                 <Minus className="w-5 h-5" />
               </button>
-              <span className="px-6 py-2 font-heading text-xl border-x-[3px] border-foreground">{quantity}</span>
+              <span className="px-6 py-2 font-heading text-xl border-x border-foreground">{quantity}</span>
               <button onClick={() => setQuantity(quantity + 1)} className="px-4 py-2 hover:bg-muted transition-colors">
                 <Plus className="w-5 h-5" />
               </button>

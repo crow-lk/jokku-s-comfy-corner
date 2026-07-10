@@ -22,14 +22,14 @@ const Index = () => {
       <HeroSection />
 
       {/* Features */}
-      <section className="py-10 bg-secondary border-y-[3px] border-foreground">
+      <section className="py-10 bg-foreground border-y border-foreground/10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {features.map((f) => (
               <div key={f.title} className="text-center">
-                <f.icon className="w-8 h-8 mx-auto mb-2 text-foreground" strokeWidth={2.5} />
-                <h4 className="font-heading text-lg text-foreground">{f.title}</h4>
-                <p className="text-sm text-muted-foreground font-body">{f.desc}</p>
+                <f.icon className="w-8 h-8 mx-auto mb-2 text-secondary" strokeWidth={2.5} />
+                <h4 className="font-heading text-lg text-secondary">{f.title}</h4>
+                <p className="text-sm text-muted font-body">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -70,21 +70,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Speech bubble CTA */}
-      <section className="py-16 bg-accent halftone-bg">
+      {/* CTA */}
+      <section className="py-16 bg-foreground text-background">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <div className="speech-bubble mb-8 inline-block">
-              <h2 className="text-3xl md:text-4xl font-heading text-foreground">
+            <div className="mb-8 inline-block">
+              <h2 className="text-3xl md:text-4xl font-heading text-background">
                 "MY BALLS HAVE NEVER BEEN HAPPIER!"
               </h2>
-              <p className="text-muted-foreground font-body mt-2">— Actual Customer, Colombo (we can't make this up)</p>
+              <p className="text-background/70 font-body mt-2">— Actual Customer, Colombo (we can't make this up)</p>
             </div>
           </div>
-          <h3 className="text-4xl md:text-5xl font-heading text-accent-foreground mt-8 mb-4">
+          <h3 className="text-4xl md:text-5xl font-heading text-background mt-8 mb-4">
             10,000+ HAPPY BALLS & COUNTING!
           </h3>
-          <Link to="/products" className="comic-btn-secondary text-xl">
+          <Link to="/products" className="comic-btn bg-background text-foreground text-xl">
             TREAT YOUR BALLS NOW!
           </Link>
         </div>

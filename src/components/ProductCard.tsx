@@ -15,7 +15,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${product.id}`} className="comic-card group block overflow-hidden">
-      <div className="relative overflow-hidden bg-muted">
+      <div className="relative overflow-hidden bg-muted rounded-xl">
         <img
           src={product.imageUrl ?? "/placeholder.svg"}
           alt={product.name}
