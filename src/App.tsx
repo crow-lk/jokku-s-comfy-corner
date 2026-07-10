@@ -9,12 +9,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+import Search from "./pages/Search";
+import Login from "./pages/Login";
+import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import NotFound from "./pages/NotFound";
 import FloatingIdeaButton from "@/components/FloatingIdeaButton";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundAndReturns from "./pages/RefundAndReturns";
 
 const queryClient = new QueryClient();
 
@@ -32,10 +38,16 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/terms" element={<TermsAndConditions />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/refund-returns" element={<RefundAndReturns />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
