@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-foreground text-background mt-16">
       <div className="zigzag-divider" />
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-3xl font-heading text-secondary mb-4">JOKKU.lk</h3>
             <p className="font-body text-background/70">
@@ -21,9 +21,17 @@ const Footer = () => {
             </div>
           </div>
           <div>
+            <h4 className="text-xl font-heading text-primary mb-3">POLICIES</h4>
+            <div className="flex flex-col gap-2">
+              <Link to="/terms" className="text-background/70 hover:text-secondary transition-colors font-body">Terms and Conditions</Link>
+              <Link to="/privacy" className="text-background/70 hover:text-secondary transition-colors font-body">Privacy Policy</Link>
+              <Link to="/refund-returns" className="text-background/70 hover:text-secondary transition-colors font-body">Refund and Returns Policy</Link>
+            </div>
+          </div>
+          <div>
             <h4 className="text-xl font-heading text-primary mb-3">CONTACT US</h4>
             <p className="text-background/70 font-body">hello@jokku.lk</p>
-            <p className="text-background/70 font-body">+94 77 123 4567</p>
+            <p className="text-background/70 font-body">+94717156558</p>
             <p className="text-background/70 font-body">Colombo, Sri Lanka</p>
           </div>
         </div>
