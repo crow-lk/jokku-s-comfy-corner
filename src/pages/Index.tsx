@@ -8,7 +8,7 @@ const features = [
   { icon: Truck, title: "FREE DELIVERY", desc: "On orders over Rs.3000" },
   { icon: Shield, title: "100% COTTON", desc: "Premium quality fabric" },
   { icon: RotateCcw, title: "EASY RETURNS", desc: "7-day hassle-free returns" },
-  { icon: Zap, title: "FAST SHIPPING", desc: "Island-wide next day delivery" },
+  { icon: Zap, title: "FAST SHIPPING", desc: "Within 3 days Island-wide delivery" },
 ];
 
 const Index = () => {

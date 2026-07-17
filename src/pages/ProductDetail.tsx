@@ -1,18 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProduct, mapProductToUi } from "@/lib/api";
 import { useCatalog } from "@/hooks/useCatalog";
 import { useCart } from "@/context/CartContext";
 import ProductCard from "@/components/ProductCard";
 import ProductImageGallery from "@/components/ProductImageGallery";
-import { Star, Minus, Plus, ArrowLeft, ShoppingCart, Check } from "lucide-react";
+import { Star, Minus, Plus, ArrowLeft, ShoppingCart, ShoppingBag, Check } from "lucide-react";
 import { toast } from "sonner";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { categoryMap, products: catalogProducts } = useCatalog();
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -85,6 +86,17 @@ const ProductDetail = () => {
       toast.success(`${product.name} (${sizeLabel}) added to cart.`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unable to add to cart.";
+      toast.error(message);
+    }
+  };
+
+  const handleBuyNow = async () => {
+    if (!selectedVariant || !canPurchase) return;
+    try {
+      await addItem(selectedVariant.id, quantity);
+      navigate("/checkout");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to proceed to checkout.";
       toast.error(message);
     }
   };
@@ -180,6 +192,14 @@ const ProductDetail = () => {
           >
             <ShoppingCart className="w-6 h-6" />
             {canPurchase ? `ADD TO CART — Rs.${(displayPrice ?? 0) * quantity}` : "PRICE ON REQUEST"}
+          </button>
+          <button
+            onClick={handleBuyNow}
+            disabled={!selectedVariant || !canPurchase}
+            className={`comic-btn text-2xl w-full justify-center gap-3 mt-3 border-2 border-black bg-white text-foreground font-bold !rounded-xl py-2 ${(!selectedVariant || !canPurchase) ? "opacity-60 cursor-not-allowed" : "hover:bg-muted"}`}
+          >
+            <ShoppingBag className="w-6 h-6" />
+            {canPurchase ? `BUY NOW — Rs.${(displayPrice ?? 0) * quantity}` : "PRICE ON REQUEST"}
           </button>
         </div>
       </div>
